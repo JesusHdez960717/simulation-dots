@@ -17,7 +17,10 @@ public class MusicService {
     private static WaveFile audio;
 
     public static int getAudioAmplitude() {
-        return audio.getSampleInt(audio.getClip().getFramePosition());
+        int n = 20000;
+        int pos = (int) Math.ceil(audio.getClip().getFramePosition()/n);
+        pos *= n;
+        return audio.getSampleInt(pos);
     }
 
     public static void playSong(String url) {

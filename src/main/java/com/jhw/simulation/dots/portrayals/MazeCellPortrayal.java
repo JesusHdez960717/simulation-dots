@@ -5,7 +5,6 @@
  */
 package com.jhw.simulation.dots.portrayals;
 
-import com.jhw.simulation.dots.main.Main;
 import com.jhw.simulation.dots.services.MusicService;
 import com.jhw.swing.material.standards.MaterialColors;
 import java.awt.*;
@@ -45,8 +44,9 @@ public class MazeCellPortrayal extends SimplePortrayal2D {
         int x = location.x;
         int y = location.y;
 
-        double ox = info.draw.x;
-        double oy = info.draw.y;
+        //para que se ajuste bien al medio del punto
+        double ox = info.draw.x - 4;
+        double oy = info.draw.y - 4;
         double sc = info.draw.width / 2;
 
         // only certain grid patterns are allowed in PacMan
@@ -66,11 +66,9 @@ public class MazeCellPortrayal extends SimplePortrayal2D {
         //           OX  XO
         //
         //  We identify which patern you have:
-        if ((int) (((MutableDouble) object).val) == 0) // we're open
-        {
+        if ((int) (((MutableDouble) object).val) == 0) { // we're open
             return;
-        } else // we're a wall.  Need to draw
-        {
+        } else { // we're a wall.  Need to draw
             // get the N/S/E/W values
             int height = field.getHeight() - 1;
             int width = field.getWidth() - 1;
@@ -111,8 +109,7 @@ public class MazeCellPortrayal extends SimplePortrayal2D {
             } else if (w == 0) {
                 line.setLine(ox, oy + sc, ox, oy - sc); // vertical line
                 g.draw(line);
-            } else // perhaps an inside curve?
-            {
+            } else {// perhaps an inside curve?
                 int nw = (y == 0 || x == 0 ? 1 : grid[x - 1][y - 1]);
                 int sw = (y == height || x == 0 ? 1 : grid[x - 1][y + 1]);
                 int ne = (y == 0 || x == width ? 1 : grid[x + 1][y - 1]);
@@ -136,7 +133,6 @@ public class MazeCellPortrayal extends SimplePortrayal2D {
             }
         }
     }
-    ArrayList<Integer> amp = new ArrayList<>();
 
     private void processColor() {
         ArrayList<Color> arr = new ArrayList<>();
@@ -149,12 +145,8 @@ public class MazeCellPortrayal extends SimplePortrayal2D {
         arr.add(MaterialColors.YELLOW_700);
         arr.add(MaterialColors.AMBER_800);
         int amplitud = MusicService.getAudioAmplitude();
-
-        if (!amp.contains(amplitud)) {
-            amp.add(amplitud);
-            System.out.println(amplitud);
-        }
-        if (amplitud > 65000) {
+        System.out.println("amp: " + amplitud);
+        if (amplitud > 30000) {
             color = Color.RED;
         } else {
             color = Color.BLUE;
