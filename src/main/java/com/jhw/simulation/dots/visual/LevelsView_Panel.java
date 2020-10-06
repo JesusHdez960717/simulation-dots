@@ -6,13 +6,19 @@
 package com.jhw.simulation.dots.visual;
 
 import com.jhw.simulation.dots.controllers.LevelsController;
+import com.jhw.simulation.dots.services.NavigationService;
+import com.jhw.simulation.dots.utils.Utility_Class;
 import com.jhw.swing.material.components.button.MaterialButtonIcon;
 import com.jhw.swing.material.components.button.MaterialButtonsFactory;
 import com.jhw.swing.material.components.container.MaterialContainersFactory;
 import com.jhw.swing.material.components.container.panel._PanelAvatarChooser;
+import com.jhw.swing.material.components.container.panel._PanelGradient;
+import com.jhw.swing.material.standards.MaterialColors;
+import com.jhw.swing.util.AvatarPanelAvatarChooser;
 import java.awt.BorderLayout;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
+import java.util.ArrayList;
 import javax.swing.ImageIcon;
 import javax.swing.JPanel;
 
@@ -20,30 +26,32 @@ import javax.swing.JPanel;
  *
  * @author Yo
  */
-public class LevelsView_Panel extends javax.swing.JPanel {
+public class LevelsView_Panel extends _PanelGradient {
 
     private final LevelsController con = new LevelsController();
 
     public LevelsView_Panel() {
         initComponents();
-        this.setName(con.getName());
-        this.buttonBack.setIcon(new ImageIcon("media/icons/back.png"));
-        this.levelChooser.setIcon(con.getBackgroundImage());
-        this.con.setAvatars(levelChooser);
+        this.setAvatars();
         this.levelChooser.setAvatarIndex(con.getAvatarIndex());
         this.addListeners();
+
+        levelChooser.requestFocusInWindow();
     }
 
     private void initComponents() {
         this.setLayout(new BorderLayout());
+        this.setIcon(con.getBackgroundImage());
 
         levelChooser = _PanelAvatarChooser.from();
+        levelChooser.setBackground(MaterialColors.TRANSPARENT);
         this.add(levelChooser);
 
         buttonBack = MaterialButtonsFactory.buildIconTransparent();
+        this.buttonBack.setIcon(new ImageIcon("media/icons/back.png"));
         JPanel p = MaterialContainersFactory.buildPanelTransparent();
         p.setLayout(new BorderLayout());
-        p.add(buttonBack, BorderLayout.WEST);
+        p.add(buttonBack, BorderLayout.CENTER);
         this.add(p, BorderLayout.NORTH);
 
     }
@@ -58,7 +66,7 @@ public class LevelsView_Panel extends javax.swing.JPanel {
                 int c = e.getKeyCode();
                 switch (c) {
                     case KeyEvent.VK_ENTER:
-                        con.actionSelectLevel(levelChooser);
+                        actionSelectLevel();
                         break;
                     case KeyEvent.VK_ESCAPE:
                         con.actionBack();
@@ -79,6 +87,35 @@ public class LevelsView_Panel extends javax.swing.JPanel {
         buttonBack.addActionListener((java.awt.event.ActionEvent evt) -> {
             con.actionBack();
         });
+    }
+
+    private void setAvatars() {
+        int maxAv = con.getProgress().getMaxLevels();
+        int actual = con.getProgress().getLevel();
+        ArrayList<AvatarPanelAvatarChooser> avatar = new ArrayList<>(maxAv);
+        for (int i = 1; i <= actual; i++) {
+            avatar.add(new AvatarPanelAvatarChooser("" + i, "Level " + i, "levels/" + i + "/icon.png"));
+        }
+
+        for (int i = actual + 1; i <= maxAv; i++) {
+            avatar.add(new AvatarPanelAvatarChooser("" + i, "Level " + i, "media/icons/lock.png"));
+        }
+
+        this.levelChooser.setAvatars(avatar);
+    }
+
+    private void actionSelectLevel() {
+        try {
+            AvatarPanelAvatarChooser av = this.levelChooser.getSelectedAvatar();
+            int level = Integer.parseInt(av.getId());
+            if (level <= con.getProgress().getLevel()) {//acces the level
+                if (Utility_Class.jopContinue("Desea jugar el nivel " + level)) {
+                    NavigationService.navigateToLevel(level);
+                }
+            }
+        } catch (Exception e) {
+            Utility_Class.jopError("Error seleccionando el nivel. " + e.getMessage());
+        }
     }
 
 }

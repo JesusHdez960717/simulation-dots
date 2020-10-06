@@ -30,7 +30,7 @@ public class NavigationService {
 
     public static final String INDEX = "INDEX";
     public static final String LEVEL_SELECTOR = "LEVEL_SELECTOR";
-    public static final String GAME = "LEVEL_SELECTOR";
+    public static final String GAME = "GAME";
 
     private static final Map<String, Action> navMap;
     private static final Map<String, Action> backMap;
@@ -56,13 +56,13 @@ public class NavigationService {
         });
 
         backMap = new HashMap<>();
-        navMap.put(INDEX, new AbstractAction() {
+        backMap.put(LEVEL_SELECTOR, new AbstractAction() {
             @Override
             public void actionPerformed(ActionEvent e) {
                 navigateTo(INDEX);
             }
         });
-        navMap.put(GAME, new AbstractAction() {
+        backMap.put(GAME, new AbstractAction() {
             @Override
             public void actionPerformed(ActionEvent e) {
                 navigateTo(LEVEL_SELECTOR);
