@@ -13,7 +13,7 @@ import javax.swing.*;
  *
  * @author Yo
  */
-public class Game_Controller {
+public class GameController {
 
     private final String name;
     private final String song = "media/audio/principal.wav";
@@ -21,7 +21,7 @@ public class Game_Controller {
 
     private final DotsSimulation_UI sim;
 
-    public Game_Controller(int level) throws Exception {
+    public GameController(int level) throws Exception {
         name = "Level " + level;
         //song = "levels/" + level + "/song.wav";
         background = "levels/" + level + "/background.jpg";
@@ -53,19 +53,4 @@ public class Game_Controller {
         return new ImageIcon(background);
     }
 
-    /*public void actionBack() {
-     actionPause();
-     if (Utility_Class.jopContinue("Desea salir, se perderá el progreso del nivel actual.")) {
-     sim.pressPause();
-     Main.changePanel(new Index_Panel());
-     }
-     sim.pressPlay();
-     }
-
-     public void actionPause() {
-     sim.pressPause();
-     }*/
-    public void hideCursor() {
-        Main.hideCursor();
-    }
 }

@@ -5,7 +5,7 @@
  */
 package com.jhw.simulation.dots.visual;
 
-import com.jhw.simulation.dots.controllers.Levels_Controller;
+import com.jhw.simulation.dots.controllers.LevelsController;
 import com.jhw.swing.material.components.button.MaterialButtonIcon;
 import com.jhw.swing.material.components.button.MaterialButtonsFactory;
 import com.jhw.swing.material.components.container.MaterialContainersFactory;
@@ -22,7 +22,7 @@ import javax.swing.JPanel;
  */
 public class LevelsView_Panel extends javax.swing.JPanel {
 
-    private final Levels_Controller con = new Levels_Controller();
+    private final LevelsController con = new LevelsController();
 
     public LevelsView_Panel() {
         initComponents();

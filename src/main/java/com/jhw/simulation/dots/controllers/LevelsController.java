@@ -7,9 +7,8 @@ package com.jhw.simulation.dots.controllers;
 
 import com.jhw.simulation.dots.main.Progress_Class;
 import com.jhw.simulation.dots.main.Main;
+import com.jhw.simulation.dots.services.NavigationService;
 import com.jhw.simulation.dots.utils.Utility_Class;
-import com.jhw.simulation.dots.visual.GameView_Panel;
-import com.jhw.simulation.dots.visual.Index_Panel;
 import com.jhw.swing.material.components.container.panel._PanelAvatarChooser;
 import com.jhw.swing.util.AvatarPanelAvatarChooser;
 import java.util.ArrayList;
@@ -19,13 +18,13 @@ import javax.swing.ImageIcon;
  *
  * @author Yo
  */
-public class Levels_Controller {
+public class LevelsController {
 
     private final String name = "Levels";
     private final String song = "media/audio/levels.wav";
     private final String background = "media/pictures/background.jpg";
 
-    public Levels_Controller() {
+    public LevelsController() {
         Main.changeAudio(song);
     }
 
@@ -74,7 +73,7 @@ public class Levels_Controller {
             int level = Integer.parseInt(av.getId());
             if (level <= getProgress().getLevel()) {//acces the level
                 if (Utility_Class.jopContinue("Desea jugar el nivel " + level)) {
-                    Main.changePanel(new GameView_Panel(level));
+                    NavigationService.navigateToLevel(level);
                 }
             }
         } catch (Exception e) {
@@ -83,6 +82,6 @@ public class Levels_Controller {
     }
 
     public void actionBack() {
-        Main.changePanel(new Index_Panel());
+        NavigationService.backFrom(NavigationService.LEVEL_SELECTOR);
     }
 }

@@ -23,6 +23,7 @@ import com.jhw.simulation.dots.portrayals.MazeCellPortrayal;
 import com.jhw.simulation.dots.portrayals.Overlay;
 import com.jhw.simulation.dots.portrayals.PlayerPortrayal;
 import com.jhw.simulation.dots.portrayals.PortalPortrayal;
+import com.jhw.simulation.dots.services.NavigationService;
 import com.jhw.simulation.dots.utils.Utility_Class;
 import com.jhw.simulation.dots.visual.Index_Panel;
 
@@ -138,7 +139,7 @@ public class DotsSimulation_UI extends GUIState {
                     ((SimpleController) c).doClose();
                 }
             };
-            c.registerFrame(Main.getFrame());   // register the frame so it appears in the "Display" list
+            c.registerFrame(NavigationService.frame());   // register the frame so it appears in the "Display" list
 
             display.insideDisplay.setOpaque(false);
             display.setBackdrop(Color.black);
@@ -181,7 +182,7 @@ public class DotsSimulation_UI extends GUIState {
         display.setFocusable(true);
 
         // Make us request focus whenever our window comes up
-        Main.getFrame().addWindowListener(new WindowAdapter() {
+        NavigationService.frame().addWindowListener(new WindowAdapter() {
             @Override
             public void windowActivated(WindowEvent e) {
                 display.requestFocusInWindow();
@@ -248,7 +249,7 @@ public class DotsSimulation_UI extends GUIState {
         cont.pressPause();
         if (Utility_Class.jopContinue("Desea salir del juego. Se perderá el progreso actual.")) {
             cont.pressStop();
-            Main.changePanel(new Index_Panel());
+            NavigationService.backFrom(NavigationService.GAME);
         } else {
             cont.pressPause();
         }
