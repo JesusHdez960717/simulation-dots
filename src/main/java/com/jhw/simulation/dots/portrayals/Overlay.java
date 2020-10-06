@@ -5,8 +5,8 @@
  */
 package com.jhw.simulation.dots.portrayals;
 
-import com.jhw.simulation.dots.dots.DotsSimulation_Sim;
-import com.jhw.simulation.dots.dots.DotsSimulation_UI;
+import com.jhw.simulation.dots.sim.DotsSimulation_Sim;
+import com.jhw.simulation.dots.sim.DotsSimulation_UI;
 import sim.portrayal.*;
 import java.awt.*;
 import java.awt.geom.*;

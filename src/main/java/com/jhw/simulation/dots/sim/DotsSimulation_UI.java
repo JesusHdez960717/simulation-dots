@@ -3,7 +3,7 @@
  Licensed under the Academic Free License version 3.0
  See the file "LICENSE" for more information
  */
-package com.jhw.simulation.dots.dots;
+package com.jhw.simulation.dots.sim;
 
 import java.awt.*;
 import java.awt.event.*;
@@ -16,7 +16,6 @@ import com.jhw.simulation.dots.agents.Dot;
 import com.jhw.simulation.dots.agents.IA;
 import com.jhw.simulation.dots.agents.Player;
 import com.jhw.simulation.dots.agents.Portal;
-import com.jhw.simulation.dots.main.Main;
 import com.jhw.simulation.dots.portrayals.DotsPortrayal;
 import com.jhw.simulation.dots.portrayals.IAPortrayal;
 import com.jhw.simulation.dots.portrayals.MazeCellPortrayal;
@@ -25,7 +24,6 @@ import com.jhw.simulation.dots.portrayals.PlayerPortrayal;
 import com.jhw.simulation.dots.portrayals.PortalPortrayal;
 import com.jhw.simulation.dots.services.NavigationService;
 import com.jhw.simulation.dots.utils.Utility_Class;
-import com.jhw.simulation.dots.visual.Index_Panel;
 
 /**
  * Creates the UI for the DotsSimulation_Sim game.
@@ -100,7 +98,7 @@ public class DotsSimulation_UI extends GUIState {
 
         agentPortrayal.setPortrayalForClass(IA.class, new IAPortrayal());
 
-        // Create the dot portrayal (also the energizers)
+        // Create the dot portrayal
         dotPortrayal.setField(sim.getDots());
 
         // dots are small
@@ -161,7 +159,7 @@ public class DotsSimulation_UI extends GUIState {
             display.display.setHorizontalScrollBarPolicy(display.display.HORIZONTAL_SCROLLBAR_NEVER);
 
             // add antialiasing and interpolation
-            display.insideDisplay.setupHints(true, false, false);
+            display.insideDisplay.setupHints(true, true, true);
 
             // Now we add in the listeners we want
             addListeners();
@@ -210,16 +208,16 @@ public class DotsSimulation_UI extends GUIState {
                         pacman.getActions()[0] = Player.E;
                         break;
                     case KeyEvent.VK_W:
-                        pacman.getActions()[1] = Player.N;
+                        pacman.getActions()[0] = Player.N;
                         break;
                     case KeyEvent.VK_S:
-                        pacman.getActions()[1] = Player.S;
+                        pacman.getActions()[0] = Player.S;
                         break;
                     case KeyEvent.VK_A:
-                        pacman.getActions()[1] = Player.W;
+                        pacman.getActions()[0] = Player.W;
                         break;
                     case KeyEvent.VK_D:
-                        pacman.getActions()[1] = Player.E;
+                        pacman.getActions()[0] = Player.E;
                         break;
                     case KeyEvent.VK_R:             // Reset the board.  Easiest way: stop and play, which calls start()
                         pressPause();

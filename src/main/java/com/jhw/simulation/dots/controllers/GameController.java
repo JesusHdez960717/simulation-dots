@@ -5,7 +5,7 @@
  */
 package com.jhw.simulation.dots.controllers;
 
-import com.jhw.simulation.dots.dots.DotsSimulation_UI;
+import com.jhw.simulation.dots.sim.DotsSimulation_UI;
 import com.jhw.simulation.dots.main.Main;
 import com.jhw.simulation.dots.services.ConfigurationService;
 import com.jhw.simulation.dots.services.MusicService;

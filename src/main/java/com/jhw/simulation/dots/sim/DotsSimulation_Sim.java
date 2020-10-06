@@ -3,7 +3,7 @@
  Licensed under the Academic Free License version 3.0
  See the file "LICENSE" for more information
  */
-package com.jhw.simulation.dots.dots;
+package com.jhw.simulation.dots.sim;
 
 import com.jhw.simulation.dots.agents.Agent;
 import com.jhw.simulation.dots.agents.Dot;
