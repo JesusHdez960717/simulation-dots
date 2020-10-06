@@ -6,6 +6,7 @@
 package com.jhw.simulation.dots.controllers;
 
 import com.jhw.simulation.dots.dots.DotsSimulation_UI;
+import com.jhw.simulation.dots.main.Main;
 import javax.swing.*;
 
 /**
@@ -24,8 +25,8 @@ public class Game_Controller {
         name = "Level " + level;
         //song = "levels/" + level + "/song.wav";
         background = "levels/" + level + "/background.jpg";
-        dots_Main.changeAudio(song);
-        sim = new DotsSimulation_UI(level, dots_Main.cfg.getScreenSize());
+        Main.changeAudio(song);
+        sim = new DotsSimulation_UI(level, Main.cfg.getScreenSize());
     }
 
     public JComponent getDisplay() {
@@ -56,7 +57,7 @@ public class Game_Controller {
      actionPause();
      if (Utility_Class.jopContinue("Desea salir, se perderá el progreso del nivel actual.")) {
      sim.pressPause();
-     dots_Main.changePanel(new Index_Panel());
+     Main.changePanel(new Index_Panel());
      }
      sim.pressPlay();
      }
@@ -65,6 +66,6 @@ public class Game_Controller {
      sim.pressPause();
      }*/
     public void hideCursor() {
-        dots_Main.hideCursor();
+        Main.hideCursor();
     }
 }

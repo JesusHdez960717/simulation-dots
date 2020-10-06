@@ -6,7 +6,7 @@
 package com.jhw.simulation.dots.controllers;
 
 import com.jhw.simulation.dots.main.Progress_Class;
-import com.jhw.simulation.dots.main.dots_Main;
+import com.jhw.simulation.dots.main.Main;
 import com.jhw.simulation.dots.utils.Utility_Class;
 import com.jhw.simulation.dots.visual.GameView_Panel;
 import com.jhw.simulation.dots.visual.Index_Panel;
@@ -26,7 +26,7 @@ public class Levels_Controller {
     private final String background = "media/pictures/background.jpg";
 
     public Levels_Controller() {
-        dots_Main.changeAudio(song);
+        Main.changeAudio(song);
     }
 
     public String getName() {
@@ -46,7 +46,7 @@ public class Levels_Controller {
     }
 
     private Progress_Class getProgress() {
-        return dots_Main.progress;
+        return Main.progress;
     }
 
     public int getAvatarIndex() {
@@ -74,7 +74,7 @@ public class Levels_Controller {
             int level = Integer.parseInt(av.getId());
             if (level <= getProgress().getLevel()) {//acces the level
                 if (Utility_Class.jopContinue("Desea jugar el nivel " + level)) {
-                    dots_Main.changePanel(new GameView_Panel(level));
+                    Main.changePanel(new GameView_Panel(level));
                 }
             }
         } catch (Exception e) {
@@ -83,6 +83,6 @@ public class Levels_Controller {
     }
 
     public void actionBack() {
-        dots_Main.changePanel(new Index_Panel());
+        Main.changePanel(new Index_Panel());
     }
 }

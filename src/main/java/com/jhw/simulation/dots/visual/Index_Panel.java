@@ -8,24 +8,25 @@ package com.jhw.simulation.dots.visual;
 import com.jhw.simulation.dots.controllers.Index_Controller;
 import com.jhw.swing.material.components.container.MaterialContainersFactory;
 import com.jhw.swing.material.components.container.panel.MaterialPanelBorder;
+import com.jhw.swing.material.components.container.panel._PanelGradient;
+import java.awt.GridLayout;
 
 /**
  *
  * @author Yo
  */
-public class Index_Panel extends javax.swing.JPanel {
+public class Index_Panel extends _PanelGradient {
 
     private final Index_Controller con = new Index_Controller();
 
     public Index_Panel() {
         initComponents();
         this.setName(con.getName());
-        this.panelBackground.setIcon(con.getBackgroundImage());
+        this.setIcon(con.getBackgroundImage());
         this.con.showCursor();
     }
 
     private void initComponents() {
-        panelBackground = MaterialContainersFactory.buildPanelGradient();
         buttonPlay = new javax.swing.JButton();
         buttonLevels = new javax.swing.JButton();
         buttonQuit = new javax.swing.JButton();
@@ -44,12 +45,14 @@ public class Index_Panel extends javax.swing.JPanel {
         buttonQuit.addActionListener((java.awt.event.ActionEvent evt) -> {
             con.actionQuit();
         });
-
+        this.setLayout(new GridLayout(3, 1));
+        this.add(buttonPlay);
+        this.add(buttonLevels);
+        this.add(buttonQuit);
     }
 
     private javax.swing.JButton buttonPlay;
     private javax.swing.JButton buttonLevels;
     private javax.swing.JButton buttonQuit;
-    private MaterialPanelBorder panelBackground;
 
 }

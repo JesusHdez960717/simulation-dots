@@ -16,7 +16,7 @@ import com.jhw.simulation.dots.agents.Dot;
 import com.jhw.simulation.dots.agents.IA;
 import com.jhw.simulation.dots.agents.Player;
 import com.jhw.simulation.dots.agents.Portal;
-import com.jhw.simulation.dots.main.dots_Main;
+import com.jhw.simulation.dots.main.Main;
 import com.jhw.simulation.dots.portrayals.DotsPortrayal;
 import com.jhw.simulation.dots.portrayals.IAPortrayal;
 import com.jhw.simulation.dots.portrayals.MazeCellPortrayal;
@@ -138,7 +138,7 @@ public class DotsSimulation_UI extends GUIState {
                     ((SimpleController) c).doClose();
                 }
             };
-            c.registerFrame(dots_Main.getFrame());   // register the frame so it appears in the "Display" list
+            c.registerFrame(Main.getFrame());   // register the frame so it appears in the "Display" list
 
             display.insideDisplay.setOpaque(false);
             display.setBackdrop(Color.black);
@@ -181,7 +181,7 @@ public class DotsSimulation_UI extends GUIState {
         display.setFocusable(true);
 
         // Make us request focus whenever our window comes up
-        dots_Main.getFrame().addWindowListener(new WindowAdapter() {
+        Main.getFrame().addWindowListener(new WindowAdapter() {
             @Override
             public void windowActivated(WindowEvent e) {
                 display.requestFocusInWindow();
@@ -248,7 +248,7 @@ public class DotsSimulation_UI extends GUIState {
         cont.pressPause();
         if (Utility_Class.jopContinue("Desea salir del juego. Se perderá el progreso actual.")) {
             cont.pressStop();
-            dots_Main.changePanel(new Index_Panel());
+            Main.changePanel(new Index_Panel());
         } else {
             cont.pressPause();
         }

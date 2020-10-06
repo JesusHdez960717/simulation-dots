@@ -9,11 +9,14 @@ import com.jhw.simulation.dots.utils.Configuration_Class;
 import com.jhw.simulation.dots.utils.WaveFile;
 import com.jhw.simulation.dots.visual.Index_Panel;
 import com.jhw.simulation.dots.visual.MainView_UI;
+import com.jhw.swing.material.components.container.MaterialContainersFactory;
 import java.awt.Cursor;
 import java.awt.Point;
 import java.awt.Toolkit;
 import java.awt.image.BufferedImage;
 import java.io.*;
+import javafx.scene.control.CheckBox;
+import javax.swing.JButton;
 import javax.swing.JComponent;
 import javax.swing.JFrame;
 
@@ -21,7 +24,7 @@ import javax.swing.JFrame;
  *
  * @author Yo
  */
-public class dots_Main {
+public class Main {
 
     public static Configuration_Class cfg = new Configuration_Class();
     public static Progress_Class progress = new Progress_Class();

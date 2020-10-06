@@ -5,7 +5,7 @@ plugins {
 
 group = 'com.jhw.simulation'
 
-mainClassName = 'com.jhw.simulation.police_car_simulation.main.SimulationMain'
+mainClassName = 'com.jhw.simulation.dots.main.Main'
 
 repositories {
     jcenter()

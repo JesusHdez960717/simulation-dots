@@ -5,7 +5,10 @@
  */
 package com.jhw.simulation.dots.controllers;
 
-import com.jhw.simulation.dots.dots_Main;
+import com.jhw.simulation.dots.main.Main;
+import com.jhw.simulation.dots.utils.Utility_Class;
+import com.jhw.simulation.dots.visual.GameView_Panel;
+import com.jhw.simulation.dots.visual.LevelsView_Panel;
 import javax.swing.ImageIcon;
 
 /**
@@ -19,7 +22,7 @@ public class Index_Controller {
     private final String background = "media/pictures/background.jpg";
 
     public Index_Controller() {
-        dots_Main.changeAudio(song);
+        Main.changeAudio(song);
     }
 
     public String getName() {
@@ -40,9 +43,9 @@ public class Index_Controller {
 
     public void actionPlay() {
         try {
-            if (Utility_Class.jopContinue("Desea jugar el nivel " + dots_Main.progress.getLevel())) {
-                dots_Main.changePanel(new GameView_Panel());
-                dots_Main.hideCursor();
+            if (Utility_Class.jopContinue("Desea jugar el nivel " + Main.progress.getLevel())) {
+                Main.changePanel(new GameView_Panel());
+                Main.hideCursor();
             }
         } catch (Exception e) {
             e.printStackTrace();
@@ -51,17 +54,17 @@ public class Index_Controller {
     }
 
     public void actionLevels() {
-        dots_Main.changePanel(new LevelsView_Panel());
-        dots_Main.hideCursor();
+        Main.changePanel(new LevelsView_Panel());
+        Main.hideCursor();
     }
 
     public void actionQuit() {
         if (Utility_Class.jopContinue("Seguro desea salir???")) {
-            dots_Main.close();
+            Main.close();
         }
     }
 
     public void showCursor() {
-        dots_Main.showCursor();
+        Main.showCursor();
     }
 }

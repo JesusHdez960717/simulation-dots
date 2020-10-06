@@ -38,14 +38,14 @@ public class Progress_Class implements Serializable {
         if (next <= maxLevels) {//validate that not pass the last level
             this.level = next;
         }
-        dots_Main.saveGame();//save the progress
+        Main.saveGame();//save the progress
     }
 
     public void winLevel(int level) {
         if (level + 1 > this.level && level <= maxLevels) {//validate that not pass the last level
             this.level = level + 1;
         }
-        dots_Main.saveGame();//save the progress
+        Main.saveGame();//save the progress
     }
 
     private int setMaxLevels() {

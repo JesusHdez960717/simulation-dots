@@ -5,6 +5,7 @@
  */
 package com.jhw.simulation.dots.visual;
 
+import com.jhw.swing.material.components.container.MaterialContainersFactory;
 import java.awt.BorderLayout;
 import java.awt.Dimension;
 import javax.swing.JComponent;
@@ -32,7 +33,7 @@ public class MainView_UI extends javax.swing.JFrame {
         setTitle("Dots 1.0");
         setUndecorated(true);
 
-        back = new JPanel();
+        back = MaterialContainersFactory.buildPanelGradient();
         back.setLayout(new BorderLayout());
 
         setContentPane(back);
@@ -44,5 +45,6 @@ public class MainView_UI extends javax.swing.JFrame {
     public void changePanel(JComponent panel) {
         back.removeAll();
         back.add(panel);
+        back.revalidate();
     }
 }

@@ -5,14 +5,14 @@
  */
 package com.jhw.simulation.dots.portrayals;
 
-import com.jhw.simulation.dots.main.dots_Main;
+import com.jhw.simulation.dots.main.Main;
+import com.jhw.swing.material.standards.MaterialColors;
 import java.awt.*;
 import java.awt.geom.*;
 import java.util.ArrayList;
 import sim.field.grid.*;
 import sim.portrayal.*;
 import sim.util.*;
-import util.materials.MaterialColor;
 
 /**
  * A special portrayal for drawing part of the maze. The way this portion is
@@ -139,15 +139,15 @@ public class MazeCellPortrayal extends SimplePortrayal2D {
 
     private void processColor() {
         ArrayList<Color> arr = new ArrayList<>();
-        arr.add(MaterialColor.WHITE);
-        arr.add(MaterialColor.GREY_200);
-        arr.add(MaterialColor.BLUEA_200);
-        arr.add(MaterialColor.BLUEA_700);
-        arr.add(MaterialColor.RED_700);
-        arr.add(MaterialColor.GREENA_400);
-        arr.add(MaterialColor.YELLOW_700);
-        arr.add(MaterialColor.AMBER_800);
-        int amplitud = dots_Main.getAudioAmplitude();
+        arr.add(MaterialColors.WHITE);
+        arr.add(MaterialColors.GREY_200);
+        arr.add(MaterialColors.BLUEA_200);
+        arr.add(MaterialColors.BLUEA_700);
+        arr.add(MaterialColors.RED_700);
+        arr.add(MaterialColors.GREENA_400);
+        arr.add(MaterialColors.YELLOW_700);
+        arr.add(MaterialColors.AMBER_800);
+        int amplitud = Main.getAudioAmplitude();
 
         if (!amp.contains(amplitud)) {
             amp.add(amplitud);

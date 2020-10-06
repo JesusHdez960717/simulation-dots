@@ -5,13 +5,12 @@
  */
 package com.jhw.simulation.dots.dots;
 
-import agents.*;
 import com.jhw.simulation.dots.agents.Agent;
 import com.jhw.simulation.dots.agents.Dot;
 import com.jhw.simulation.dots.agents.IA;
 import com.jhw.simulation.dots.agents.Player;
 import com.jhw.simulation.dots.agents.Portal;
-import com.jhw.simulation.dots.main.dots_Main;
+import com.jhw.simulation.dots.main.Main;
 import com.jhw.simulation.dots.utils.GridReader;
 import com.jhw.simulation.dots.utils.Utility_Class;
 import com.jhw.simulation.dots.visual.LevelsView_Panel;
@@ -312,8 +311,8 @@ public class DotsSimulation_Sim extends SimState {
     public void winGame(Agent ag) {
         if (ag instanceof Player) {//you win the game
             Utility_Class.jopHelp("Felicidades, ha ganado el nivel.");
-            dots_Main.progress.winLevel(level);
-            dots_Main.changePanel(new LevelsView_Panel());
+            Main.progress.winLevel(level);
+            Main.changePanel(new LevelsView_Panel());
         } else {//the IA win the game
             resetGame();
         }
