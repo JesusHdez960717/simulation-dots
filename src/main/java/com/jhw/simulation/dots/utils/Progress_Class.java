@@ -3,8 +3,9 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package com.jhw.simulation.dots.main;
+package com.jhw.simulation.dots.utils;
 
+import com.jhw.simulation.dots.services.ProgressService;
 import java.io.File;
 import java.io.Serializable;
 
@@ -16,7 +17,7 @@ public class Progress_Class implements Serializable {
 
     public static String URL_SALVAS = "progress.dat";
     private int level = 1;
-    private int maxLevels = setMaxLevels();
+    private final int maxLevels = setMaxLevels();
 
     public Progress_Class() {
     }
@@ -38,14 +39,14 @@ public class Progress_Class implements Serializable {
         if (next <= maxLevels) {//validate that not pass the last level
             this.level = next;
         }
-        Main.saveGame();//save the progress
+        ProgressService.saveGame();//save the progress
     }
 
     public void winLevel(int level) {
         if (level + 1 > this.level && level <= maxLevels) {//validate that not pass the last level
             this.level = level + 1;
         }
-        Main.saveGame();//save the progress
+        ProgressService.saveGame();//save the progress
     }
 
     private int setMaxLevels() {

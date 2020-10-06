@@ -5,8 +5,7 @@
  */
 package com.jhw.simulation.dots.visual;
 
-import com.jhw.simulation.dots.controllers.Game_Controller;
-import com.jhw.simulation.dots.main.Main;
+import com.jhw.simulation.dots.controllers.GameController;
 import java.awt.BorderLayout;
 
 /**
@@ -15,20 +14,15 @@ import java.awt.BorderLayout;
  */
 public class GameView_Panel extends javax.swing.JPanel {
 
-    private final Game_Controller con;
-
-    public GameView_Panel() throws Exception {
-        this(Main.progress.getLevel());//no deja llamarlo desde el controller con.getProgress
-    }
+    private final GameController con;
 
     public GameView_Panel(int level) throws Exception {
-        con = new Game_Controller(level);
+        con = new GameController(level);
 
         this.setName("Game");
 
         this.setLayout(new BorderLayout());
         this.add(con.getDisplay());
-        con.hideCursor();
     }
 
 }
