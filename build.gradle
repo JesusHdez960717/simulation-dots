@@ -1,0 +1,23 @@
+plugins {
+    id 'java'
+    id 'application'
+}
+
+group = 'com.jhw.simulation'
+
+mainClassName = 'com.jhw.simulation.police_car_simulation.main.SimulationMain'
+
+repositories {
+    jcenter()
+    mavenCentral()
+}
+
+dependencies {
+    testImplementation 'junit:junit:4.13'
+    
+    compile fileTree(dir: 'libs', include: '*.jar')
+    
+    implementation project(':swing-derivable_icons')
+    implementation project(':swing-material-standards')
+    implementation project(':swing-material-core')
+}

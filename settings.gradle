@@ -1,0 +1,25 @@
+rootProject.name = 'simulation-dots'
+
+include ':swing-material-core'
+project(':swing-material-core').projectDir = "E:\\Trabajos\\Projects\\GIT Projects Gradle\\swing-material-core" as File
+
+include ':swing-derivable_icons'
+project(':swing-derivable_icons').projectDir = "E:\\Trabajos\\Projects\\GIT Projects Gradle\\swing-derivable_icons" as File
+
+include ':swing-material-standards'
+project(':swing-material-standards').projectDir = "E:\\Trabajos\\Projects\\GIT Projects Gradle\\swing-material-standards" as File
+
+include ':swing-material-prepared'
+project(':swing-material-prepared').projectDir = "E:\\Trabajos\\Projects\\GIT Projects Gradle\\swing-material-prepared" as File
+
+include ':utils-core'
+project(':utils-core').projectDir = "E:\\Trabajos\\Projects\\GIT Projects Gradle\\utils-core" as File
+
+include ':clean-core-full'
+project(':clean-core-full').projectDir = "E:\\Trabajos\\Projects\\GIT Projects Gradle\\clean-core-full" as File
+
+include ':clean-swing'
+project(':clean-swing').projectDir = "E:\\Trabajos\\Projects\\GIT Projects Gradle\\clean-swing" as File
+
+include ':module-util-personalization'
+project(':module-util-personalization').projectDir = "E:\\Trabajos\\Projects\\GIT Projects Gradle\\module-util-personalization" as File
