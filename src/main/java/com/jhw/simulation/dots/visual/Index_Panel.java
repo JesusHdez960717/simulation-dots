@@ -5,9 +5,7 @@
  */
 package com.jhw.simulation.dots.visual;
 
-import com.jhw.simulation.dots.controllers.Index_Controller;
-import com.jhw.swing.material.components.container.MaterialContainersFactory;
-import com.jhw.swing.material.components.container.panel.MaterialPanelBorder;
+import com.jhw.simulation.dots.controllers.IndexController;
 import com.jhw.swing.material.components.container.panel._PanelGradient;
 import java.awt.GridLayout;
 
@@ -17,13 +15,12 @@ import java.awt.GridLayout;
  */
 public class Index_Panel extends _PanelGradient {
 
-    private final Index_Controller con = new Index_Controller();
+    private final IndexController con = new IndexController();
 
     public Index_Panel() {
         initComponents();
         this.setName(con.getName());
         this.setIcon(con.getBackgroundImage());
-        this.con.showCursor();
     }
 
     private void initComponents() {

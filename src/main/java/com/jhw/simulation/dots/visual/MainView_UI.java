@@ -22,9 +22,8 @@ public class MainView_UI extends javax.swing.JFrame {
      */
     public MainView_UI() {
         initComponents();
-        //this.setSize(dots_Main.cfg.getScreenSize());
+        //this.setExtendedState(MAXIMIZED_BOTH);
         this.setSize(new Dimension(800, 500));
-        //changePanel(new Index_Panel());
         this.setVisible(true);
     }
 

@@ -1,6 +1,6 @@
 package com.jhw.simulation.dots.agents;
 
-import com.jhw.simulation.dots.dots.DotsSimulation_Sim;
+import com.jhw.simulation.dots.sim.DotsSimulation_Sim;
 import sim.engine.SimState;
 import sim.engine.Steppable;
 import sim.engine.Stoppable;
