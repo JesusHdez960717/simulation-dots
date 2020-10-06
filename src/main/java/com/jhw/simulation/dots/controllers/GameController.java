@@ -7,6 +7,8 @@ package com.jhw.simulation.dots.controllers;
 
 import com.jhw.simulation.dots.dots.DotsSimulation_UI;
 import com.jhw.simulation.dots.main.Main;
+import com.jhw.simulation.dots.services.ConfigurationService;
+import com.jhw.simulation.dots.services.MusicService;
 import javax.swing.*;
 
 /**
@@ -25,8 +27,8 @@ public class GameController {
         name = "Level " + level;
         //song = "levels/" + level + "/song.wav";
         background = "levels/" + level + "/background.jpg";
-        Main.changeAudio(song);
-        sim = new DotsSimulation_UI(level, Main.cfg.getScreenSize());
+        MusicService.playSong(song);
+        sim = new DotsSimulation_UI(level, ConfigurationService.screenSize);
     }
 
     public JComponent getDisplay() {

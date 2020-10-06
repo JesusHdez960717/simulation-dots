@@ -6,6 +6,7 @@
 package com.jhw.simulation.dots.portrayals;
 
 import com.jhw.simulation.dots.main.Main;
+import com.jhw.simulation.dots.services.MusicService;
 import com.jhw.swing.material.standards.MaterialColors;
 import java.awt.*;
 import java.awt.geom.*;
@@ -147,7 +148,7 @@ public class MazeCellPortrayal extends SimplePortrayal2D {
         arr.add(MaterialColors.GREENA_400);
         arr.add(MaterialColors.YELLOW_700);
         arr.add(MaterialColors.AMBER_800);
-        int amplitud = Main.getAudioAmplitude();
+        int amplitud = MusicService.getAudioAmplitude();
 
         if (!amp.contains(amplitud)) {
             amp.add(amplitud);

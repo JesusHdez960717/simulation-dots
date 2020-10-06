@@ -6,7 +6,9 @@
 package com.jhw.simulation.dots.controllers;
 
 import com.jhw.simulation.dots.main.Main;
+import com.jhw.simulation.dots.services.MusicService;
 import com.jhw.simulation.dots.services.NavigationService;
+import com.jhw.simulation.dots.services.ProgressService;
 import com.jhw.simulation.dots.utils.Utility_Class;
 import javax.swing.ImageIcon;
 
@@ -21,7 +23,7 @@ public class IndexController {
     private final String background = "media/pictures/background.jpg";
 
     public IndexController() {
-        Main.changeAudio(song);
+        MusicService.playSong(song);
     }
 
     public String getName() {
@@ -41,7 +43,7 @@ public class IndexController {
     }
 
     public void actionPlay() {
-        int level = Main.progress.getLevel();
+        int level = ProgressService.getLevel();
         if (Utility_Class.jopContinue("Desea jugar el nivel " + level)) {
             NavigationService.navigateToLevel(level);
         }
@@ -53,7 +55,7 @@ public class IndexController {
 
     public void actionQuit() {
         if (Utility_Class.jopContinue("Seguro desea salir???")) {
-            Main.close();
+        System.exit(0);
         }
     }
 }

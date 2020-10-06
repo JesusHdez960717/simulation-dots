@@ -12,6 +12,7 @@ import com.jhw.simulation.dots.agents.Player;
 import com.jhw.simulation.dots.agents.Portal;
 import com.jhw.simulation.dots.main.Main;
 import com.jhw.simulation.dots.services.NavigationService;
+import com.jhw.simulation.dots.services.ProgressService;
 import com.jhw.simulation.dots.utils.GridReader;
 import com.jhw.simulation.dots.utils.Utility_Class;
 import com.jhw.simulation.dots.visual.LevelsView_Panel;
@@ -312,7 +313,7 @@ public class DotsSimulation_Sim extends SimState {
     public void winGame(Agent ag) {
         if (ag instanceof Player) {//you win the game
             Utility_Class.jopHelp("Felicidades, ha ganado el nivel.");
-            Main.progress.winLevel(level);
+            ProgressService.progress.winLevel(level);
             NavigationService.backFrom(NavigationService.GAME);
         } else {//the IA win the game
             resetGame();

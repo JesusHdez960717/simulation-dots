@@ -7,6 +7,7 @@ package com.jhw.simulation.dots.visual;
 
 import com.jhw.simulation.dots.controllers.LevelsController;
 import com.jhw.simulation.dots.services.NavigationService;
+import com.jhw.simulation.dots.services.ProgressService;
 import com.jhw.simulation.dots.utils.Utility_Class;
 import com.jhw.swing.material.components.button.MaterialButtonIcon;
 import com.jhw.swing.material.components.button.MaterialButtonsFactory;
@@ -90,8 +91,8 @@ public class LevelsView_Panel extends _PanelGradient {
     }
 
     private void setAvatars() {
-        int maxAv = con.getProgress().getMaxLevels();
-        int actual = con.getProgress().getLevel();
+        int maxAv = ProgressService.getMaxLevels();
+        int actual = ProgressService.getLevel();
         ArrayList<AvatarPanelAvatarChooser> avatar = new ArrayList<>(maxAv);
         for (int i = 1; i <= actual; i++) {
             avatar.add(new AvatarPanelAvatarChooser("" + i, "Level " + i, "levels/" + i + "/icon.png"));
@@ -108,7 +109,7 @@ public class LevelsView_Panel extends _PanelGradient {
         try {
             AvatarPanelAvatarChooser av = this.levelChooser.getSelectedAvatar();
             int level = Integer.parseInt(av.getId());
-            if (level <= con.getProgress().getLevel()) {//acces the level
+            if (level <= ProgressService.getLevel()) {//acces the level
                 if (Utility_Class.jopContinue("Desea jugar el nivel " + level)) {
                     NavigationService.navigateToLevel(level);
                 }

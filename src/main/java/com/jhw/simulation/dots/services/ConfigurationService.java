@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package com.jhw.simulation.dots.utils;
+package com.jhw.simulation.dots.services;
 
 import java.awt.Dimension;
 import java.awt.Toolkit;
@@ -12,15 +12,11 @@ import java.awt.Toolkit;
  *
  * @author Yo
  */
-public class Configuration_Class {
+public class ConfigurationService {
 
-    private final Dimension screen = Toolkit.getDefaultToolkit().getScreenSize();
+    public static final Dimension screenSize;
 
-    public Configuration_Class() {
+    static {
+        screenSize = Toolkit.getDefaultToolkit().getScreenSize();
     }
-
-    public Dimension getScreenSize() {
-        return screen;
-    }
-
 }

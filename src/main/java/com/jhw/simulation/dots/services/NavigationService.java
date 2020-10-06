@@ -88,7 +88,7 @@ public class NavigationService {
 
     public static void navigateToLevel(int level) {
         try {
-            changePanel(new GameView_Panel(Main.progress.getLevel()));
+            changePanel(new GameView_Panel(ProgressService.getLevel()));
             hideCursor();
         } catch (Exception ex) {
             ex.printStackTrace();

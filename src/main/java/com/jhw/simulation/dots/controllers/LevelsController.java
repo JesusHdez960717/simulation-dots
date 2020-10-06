@@ -5,13 +5,11 @@
  */
 package com.jhw.simulation.dots.controllers;
 
-import com.jhw.simulation.dots.main.Progress_Class;
+import com.jhw.simulation.dots.utils.Progress_Class;
 import com.jhw.simulation.dots.main.Main;
+import com.jhw.simulation.dots.services.MusicService;
 import com.jhw.simulation.dots.services.NavigationService;
-import com.jhw.simulation.dots.utils.Utility_Class;
-import com.jhw.swing.material.components.container.panel._PanelAvatarChooser;
-import com.jhw.swing.util.AvatarPanelAvatarChooser;
-import java.util.ArrayList;
+import com.jhw.simulation.dots.services.ProgressService;
 import javax.swing.ImageIcon;
 
 /**
@@ -25,7 +23,7 @@ public class LevelsController {
     private final String background = "media/pictures/background.jpg";
 
     public LevelsController() {
-        Main.changeAudio(song);
+        MusicService.playSong(song);
     }
 
     public String getName() {
@@ -44,12 +42,8 @@ public class LevelsController {
         return new ImageIcon(background);
     }
 
-    public Progress_Class getProgress() {
-        return Main.progress;
-    }
-
     public int getAvatarIndex() {
-        return getProgress().getLevel() - 1;
+        return ProgressService.getLevel() - 1;
     }
 
     public void actionBack() {
