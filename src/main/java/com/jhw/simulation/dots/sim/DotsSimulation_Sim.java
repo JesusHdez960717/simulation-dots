@@ -5,17 +5,17 @@
  */
 package com.jhw.simulation.dots.sim;
 
-import com.jhw.simulation.dots.agents.Agent;
-import com.jhw.simulation.dots.agents.Dot;
-import com.jhw.simulation.dots.agents.IA;
-import com.jhw.simulation.dots.agents.Player;
-import com.jhw.simulation.dots.agents.Portal;
-import com.jhw.simulation.dots.main.Main;
+import com.jhw.simulation.dots.agents.others.Death;
+import com.jhw.simulation.dots.agents.players.Agent;
+import com.jhw.simulation.dots.agents.players.IA;
+import com.jhw.simulation.dots.agents.players.Player;
+import com.jhw.simulation.dots.agents.powers.PowerGenerator;
+import com.jhw.simulation.dots.agents.statics.Dot;
+import com.jhw.simulation.dots.agents.statics.Portal;
 import com.jhw.simulation.dots.services.NavigationService;
 import com.jhw.simulation.dots.services.ProgressService;
 import com.jhw.simulation.dots.utils.GridReader;
 import com.jhw.simulation.dots.utils.Utility_Class;
-import com.jhw.simulation.dots.visual.LevelsView_Panel;
 import java.io.*;
 import sim.engine.*;
 import sim.field.continuous.*;
@@ -51,7 +51,7 @@ public class DotsSimulation_Sim extends SimState {
     /**
      * The IA
      */
-    public IA[] iaArr;
+    private IA[] iaArr;
 
     /**
      * Holds Dots, Powers and Portal.
@@ -61,12 +61,17 @@ public class DotsSimulation_Sim extends SimState {
     /**
      * Hold the dots
      */
-    public Dot[] dotsArr;
+    private Dot[] dotsArr;
 
     /**
      * Hold the portals
      */
-    public Portal[] portalsArr;
+    private Portal[] portalsArr;
+
+    /**
+     * Holds Dots, Powers and Portal.
+     */
+    private Continuous2D powers;
 
     /**
      * The maze proper.
@@ -78,6 +83,7 @@ public class DotsSimulation_Sim extends SimState {
      */
     private int[] actions;
 
+    private PowerGenerator pw;
     /**
      * The current level.
      */
@@ -98,6 +104,7 @@ public class DotsSimulation_Sim extends SimState {
     private int[][] playersPos;
     private int[][] dotsPos;
     private int[][] portalPos;
+    private int[][] powerPos;
 
     /**
      * Creates a Dots simulation with the given random number seed and level.
@@ -115,6 +122,7 @@ public class DotsSimulation_Sim extends SimState {
         iaPos = GridReader.readCoordinates(url + "ia.txt");
         playersPos = GridReader.readCoordinates(url + "player.txt");
         portalPos = GridReader.readCoordinates(url + "portal.txt");
+        powerPos = GridReader.readCoordinates(url + "power.txt");
     }
 
     /**
@@ -132,6 +140,7 @@ public class DotsSimulation_Sim extends SimState {
 
         agents = new Continuous2D(1.0, maze.getWidth(), maze.getHeight());
         dots = new Continuous2D(1.0, maze.getWidth(), maze.getHeight());
+        powers = new Continuous2D(1.0, maze.getWidth(), maze.getHeight());
 
         resetGame();
     }
@@ -163,6 +172,7 @@ public class DotsSimulation_Sim extends SimState {
      */
     public void resetAgents() {
         agents.clear();
+        powers.clear();
 
         iaArr = new IA[iaPos.length];
         for (int i = 0; i < iaPos.length; i++) {
@@ -179,6 +189,8 @@ public class DotsSimulation_Sim extends SimState {
         for (int i = 0; i < playersArr.length; i++) {
             playersArr[i] = new Player(this, i, new Double2D(playersPos[i][0], playersPos[i][1]), playersPos[i][2]);
         }
+
+//        pw = new PowerGenerator(this);
     }
 
     public Player pacClosestTo(MutableDouble2D location) {
@@ -187,12 +199,10 @@ public class DotsSimulation_Sim extends SimState {
         }
         Player best = null;
         int count = 1;
-        for (int i = 0; i < playersArr.length; i++) {
-            if (playersArr[i] != null) {
-                if (best == null
-                        || (best.getLocation().distanceSq(location) > playersArr[i].getLocation().distanceSq(location) && ((count = 1) == 1)
-                        || best.getLocation().distanceSq(location) == playersArr[i].getLocation().distanceSq(location) && random.nextBoolean(1.0 / (++count)))) {
-                    best = playersArr[i];
+        for (Player p : playersArr) {
+            if (p != null) {
+                if (best == null || (best.getLocation().distanceSq(location) > p.getLocation().distanceSq(location) && ((count = 1) == 1) || best.getLocation().distanceSq(location) == p.getLocation().distanceSq(location) && random.nextBoolean(1.0 / (++count)))) {
+                    best = p;
                 }
             }
         }
@@ -210,16 +220,8 @@ public class DotsSimulation_Sim extends SimState {
         return agents;
     }
 
-    public void setAgents(Continuous2D agents) {
-        this.agents = agents;
-    }
-
     public Continuous2D getDots() {
         return dots;
-    }
-
-    public void setDots(Continuous2D dots) {
-        this.dots = dots;
     }
 
     public IntGrid2D getMaze() {
@@ -234,90 +236,58 @@ public class DotsSimulation_Sim extends SimState {
         return actions;
     }
 
-    public void setActions(int[] actions) {
-        this.actions = actions;
-    }
-
     public int getDeaths() {
         return deaths;
-    }
-
-    public void setDeaths(int deaths) {
-        this.deaths = deaths;
     }
 
     public int getLevel() {
         return level;
     }
 
-    public void setLevel(int level) {
-        this.level = level;
-    }
-
     public int getScore() {
         return score;
-    }
-
-    public void setScore(int score) {
-        this.score = score;
     }
 
     public Player[] getPacsArr() {
         return playersArr;
     }
 
-    public void setPacsArr(Player[] pacsArr) {
-        this.playersArr = pacsArr;
-    }
-
     public int[][] getGrid() {
         return grid;
-    }
-
-    public void setGrid(int[][] grid) {
-        this.grid = grid;
     }
 
     public int[][] getIaPos() {
         return iaPos;
     }
 
-    public void setIaPos(int[][] iaPos) {
-        this.iaPos = iaPos;
-    }
-
     public int[][] getPlayersPos() {
         return playersPos;
-    }
-
-    public void setPlayersPos(int[][] playersPos) {
-        this.playersPos = playersPos;
     }
 
     public int[][] getDotsPos() {
         return dotsPos;
     }
 
-    public void setDotsPos(int[][] dotsPos) {
-        this.dotsPos = dotsPos;
-    }
-
     public int[][] getPortalPos() {
         return portalPos;
     }
 
-    public void setPortalPos(int[][] portalPos) {
-        this.portalPos = portalPos;
+    public Continuous2D getPowers() {
+        return powers;
     }
 
     public void winGame(Agent ag) {
         if (ag instanceof Player) {//you win the game
             Utility_Class.jopHelp("Felicidades, ha ganado el nivel.");
             ProgressService.progress.winLevel(level);
-            NavigationService.backFrom(NavigationService.GAME);
+            NavigationService.navigateTo(NavigationService.LEVEL_SELECTOR);
         } else {//the IA win the game
             resetGame();
         }
+    }
+
+    public void addDeath(Agent a) {
+        this.dots.setObjectLocation(new Death(), new Double2D(a.getLocation()));
     }
 
 }

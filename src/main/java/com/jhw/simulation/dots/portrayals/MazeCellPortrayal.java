@@ -33,8 +33,8 @@ public class MazeCellPortrayal extends SimplePortrayal2D {
 
     QuadCurve2D.Double curve = new QuadCurve2D.Double();
     Line2D.Double line = new Line2D.Double();
-    Color color = new Color(255, 255, 255);  // traditional pacman color
-    BasicStroke stroke = new BasicStroke(3f);//2f standard
+    Color color = new Color(255, 255, 255);
+    BasicStroke stroke = new BasicStroke(3f);
 
     @Override
     public void draw(Object object, Graphics2D g, DrawInfo2D info) {
@@ -44,12 +44,11 @@ public class MazeCellPortrayal extends SimplePortrayal2D {
         int x = location.x;
         int y = location.y;
 
-        //para que se ajuste bien al medio del punto
-        double ox = info.draw.x - 4;
+        double ox = info.draw.x - 4;//-3 para que se centre
         double oy = info.draw.y - 4;
         double sc = info.draw.width / 2;
 
-        // only certain grid patterns are allowed in PacMan
+        // only certain grid patterns are allowed in the grid
         //
         //      O    O    O    X    X    X    X    X    X
         //  O  OXX  XXO  XXX  OXX  XXO  XXX  XXO  OXX  XXX
@@ -66,9 +65,9 @@ public class MazeCellPortrayal extends SimplePortrayal2D {
         //           OX  XO
         //
         //  We identify which patern you have:
-        if ((int) (((MutableDouble) object).val) == 0) { // we're open
+        if ((int) (((MutableDouble) object).val) == 0) {// we're open
             return;
-        } else { // we're a wall.  Need to draw
+        } else {// we're a wall.  Need to draw
             // get the N/S/E/W values
             int height = field.getHeight() - 1;
             int width = field.getWidth() - 1;
@@ -76,18 +75,18 @@ public class MazeCellPortrayal extends SimplePortrayal2D {
             int w = (x == 0 ? 1 : grid[x - 1][y]);
             int s = (y == height ? 1 : grid[x][y + 1]);
             int e = (x == width ? 1 : grid[x + 1][y]);
-
             g.setColor(color);
             g.setStroke(stroke);
             if (n == 0) {
                 if (w == 0) {
                     curve.setCurve(ox + sc, oy, ox, oy, ox, oy + sc);  // curve left to up
                     g.draw(curve);
+                    //ImageIcon i = new ImageIcon("media/icons/maze/1.png");
+                    //g.drawImage(i.getImage(), (int)ox, (int)oy, null);
                 } else if (e == 0) {
                     curve.setCurve(ox - sc, oy, ox, oy, ox, oy + sc);  // curve right to up
                     g.draw(curve);
-                } else // neither
-                {
+                } else {// neither
                     line.setLine(ox + sc, oy, ox - sc, oy); // horizontal line
                     g.draw(line);
                 }
@@ -98,8 +97,7 @@ public class MazeCellPortrayal extends SimplePortrayal2D {
                 } else if (e == 0) {
                     curve.setCurve(ox - sc, oy, ox, oy, ox, oy - sc);  // curve right to down
                     g.draw(curve);
-                } else // neither
-                {
+                } else {// neither
                     line.setLine(ox + sc, oy, ox - sc, oy); // horizontal line
                     g.draw(line);
                 }
@@ -145,8 +143,9 @@ public class MazeCellPortrayal extends SimplePortrayal2D {
         arr.add(MaterialColors.YELLOW_700);
         arr.add(MaterialColors.AMBER_800);
         int amplitud = MusicService.getAudioAmplitude();
-        System.out.println("amp: " + amplitud);
-        if (amplitud > 30000) {
+
+        System.out.println(amplitud);
+        if (amplitud > 65000) {
             color = Color.RED;
         } else {
             color = Color.BLUE;

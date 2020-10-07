@@ -1,8 +1,3 @@
-/*
- Copyright 2009  by Sean Luke and Vittorio Zipparo
- Licensed under the Academic Free License version 3.0
- See the file "LICENSE" for more information
- */
 package com.jhw.simulation.dots.portrayals;
 
 import com.jhw.simulation.dots.sim.DotsSimulation_Sim;
@@ -42,9 +37,9 @@ public class Overlay extends FieldPortrayal2D {
         // first figure out the Y location for the scores etc.  This is done ONCE and stored away because
         // the font numbers sometimes don't have the same bounding box vertically, causing the text to jump about.
         Rectangle2D bounds = new TextLayout("" + pacman.getScore(), font, graphics.getFontRenderContext()).getBounds();
-        if (firstTimeScoreY == 0) {
+        //if (firstTimeScoreY == 0) {
             firstTimeScoreY = (int) ((GUTTER + bounds.getHeight()) / 2);
-        }
+        //}
 
         // if we're paused, say so
         if (((SimpleController) (ui.controller)).getPlayState() == SimpleController.PS_PAUSED) {
