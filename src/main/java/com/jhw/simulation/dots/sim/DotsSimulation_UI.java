@@ -5,6 +5,24 @@
  */
 package com.jhw.simulation.dots.sim;
 
+import com.jhw.simulation.dots.agents.others.Death;
+import com.jhw.simulation.dots.agents.players.IA;
+import com.jhw.simulation.dots.agents.players.Player;
+import com.jhw.simulation.dots.agents.powers.PowerVisual;
+import com.jhw.simulation.dots.agents.statics.Dot;
+import com.jhw.simulation.dots.agents.statics.Portal;
+import com.jhw.simulation.dots.portrayals.BackgroundPortrayal;
+import com.jhw.simulation.dots.portrayals.DeathPortrayal;
+import com.jhw.simulation.dots.portrayals.DotsPortrayal;
+import com.jhw.simulation.dots.portrayals.IAPortrayal;
+import com.jhw.simulation.dots.portrayals.MazeCellPortrayal;
+import com.jhw.simulation.dots.portrayals.Overlay;
+import com.jhw.simulation.dots.portrayals.PlayerPortrayal;
+import com.jhw.simulation.dots.portrayals.PortalPortrayal;
+import com.jhw.simulation.dots.portrayals.PowerPortrayal;
+import com.jhw.simulation.dots.services.NavigationService;
+import com.jhw.simulation.dots.utils.Utility_Class;
+import com.jhw.simulation.dots.visual.Index_Panel;
 import java.awt.*;
 import java.awt.event.*;
 import java.io.IOException;
@@ -12,18 +30,6 @@ import sim.display.*;
 import sim.engine.*;
 import sim.portrayal.continuous.*;
 import sim.portrayal.grid.*;
-import com.jhw.simulation.dots.agents.Dot;
-import com.jhw.simulation.dots.agents.IA;
-import com.jhw.simulation.dots.agents.Player;
-import com.jhw.simulation.dots.agents.Portal;
-import com.jhw.simulation.dots.portrayals.DotsPortrayal;
-import com.jhw.simulation.dots.portrayals.IAPortrayal;
-import com.jhw.simulation.dots.portrayals.MazeCellPortrayal;
-import com.jhw.simulation.dots.portrayals.Overlay;
-import com.jhw.simulation.dots.portrayals.PlayerPortrayal;
-import com.jhw.simulation.dots.portrayals.PortalPortrayal;
-import com.jhw.simulation.dots.services.NavigationService;
-import com.jhw.simulation.dots.utils.Utility_Class;
 
 /**
  * Creates the UI for the DotsSimulation_Sim game.
@@ -39,6 +45,7 @@ public class DotsSimulation_UI extends GUIState {
     private final ValueGridPortrayal2D mazePortrayal = new ValueGridPortrayal2D();
     private final ContinuousPortrayal2D agentPortrayal = new ContinuousPortrayal2D();
     private final ContinuousPortrayal2D dotPortrayal = new ContinuousPortrayal2D();
+    private final ContinuousPortrayal2D powerPortrayal = new ContinuousPortrayal2D();
 
     private final Dimension dim;
 
@@ -98,14 +105,20 @@ public class DotsSimulation_UI extends GUIState {
 
         agentPortrayal.setPortrayalForClass(IA.class, new IAPortrayal());
 
-        // Create the dot portrayal
+        // Create the dot portrayal (also the energizers)
         dotPortrayal.setField(sim.getDots());
 
-        // dots are small
+        // dots
         dotPortrayal.setPortrayalForClass(Dot.class, new DotsPortrayal());
 
-        // portal are bigger
+        // portal
         dotPortrayal.setPortrayalForClass(Portal.class, new PortalPortrayal());
+
+        //deaths
+        dotPortrayal.setPortrayalForClass(Death.class, new DeathPortrayal());
+
+        //powers
+        powerPortrayal.setPortrayalForClass(PowerVisual.class, new PowerPortrayal());
 
         // set up the maze portrayal
         mazePortrayal.setField(sim.getMaze());
@@ -126,12 +139,13 @@ public class DotsSimulation_UI extends GUIState {
         super.init(c);
         try {
             // make the displayer
-            Dimension dim = getAdjustedDimension();
+            Dimension d = getAdjustedDimension();
             //display = new Display2D(28 * 20, 35 * 20, this) {//standar 16x16 pix  28 x 35
-            display = new Display2D(dim.width, dim.height, this) {//standar 16x16 pix  28 x 35
+            display = new Display2D(d.width, d.height, this) {//standar 16x16 pix  28 x 35
                 public void createConsoleMenu() {
                 }
 
+                @Override
                 public void quit() {
                     super.quit();
                     ((SimpleController) c).doClose();
@@ -139,13 +153,17 @@ public class DotsSimulation_UI extends GUIState {
             };
             c.registerFrame(NavigationService.frame());   // register the frame so it appears in the "Display" list
 
-            display.insideDisplay.setOpaque(false);
+            // add antialiasing and interpolation
+            display.insideDisplay.setupHints(true, true, true);
+
+            //add background color
             display.setBackdrop(Color.black);
 
-            // Notice the order: first the background, then the dots, then the agents, then the overlay
+            // Notice the order: first the background,then the maze, then the dots,then the powers, then the agents, then the overlay
+            display.attach(new BackgroundPortrayal(), "Background");
             display.attach(mazePortrayal, "Maze");
-            // display.attach( background, "Background");
             display.attach(dotPortrayal, "Dots", 8, 8, true);
+            display.attach(powerPortrayal, "Powers", 8, 8, true);
             display.attach(agentPortrayal, "Agents", 8, 8, true);
             display.attach(new Overlay(this), "Overlay");
 
@@ -157,9 +175,6 @@ public class DotsSimulation_UI extends GUIState {
             // delete the scroll bars
             display.display.setVerticalScrollBarPolicy(display.display.VERTICAL_SCROLLBAR_NEVER);
             display.display.setHorizontalScrollBarPolicy(display.display.HORIZONTAL_SCROLLBAR_NEVER);
-
-            // add antialiasing and interpolation
-            display.insideDisplay.setupHints(true, true, true);
 
             // Now we add in the listeners we want
             addListeners();
@@ -207,18 +222,18 @@ public class DotsSimulation_UI extends GUIState {
                     case KeyEvent.VK_RIGHT:
                         pacman.getActions()[0] = Player.E;
                         break;
-                    case KeyEvent.VK_W:
-                        pacman.getActions()[0] = Player.N;
+                    /*case KeyEvent.VK_W:
+                        pacman.getActions()[1] = Player.N;
                         break;
                     case KeyEvent.VK_S:
-                        pacman.getActions()[0] = Player.S;
+                        pacman.getActions()[1] = Player.S;
                         break;
                     case KeyEvent.VK_A:
-                        pacman.getActions()[0] = Player.W;
+                        pacman.getActions()[1] = Player.W;
                         break;
                     case KeyEvent.VK_D:
-                        pacman.getActions()[0] = Player.E;
-                        break;
+                        pacman.getActions()[1] = Player.E;
+                        break;*/
                     case KeyEvent.VK_R:             // Reset the board.  Easiest way: stop and play, which calls start()
                         pressPause();
                         if (Utility_Class.jopContinue("Desea reiniciar el nivel, se perdera todo el progreso.")) {
