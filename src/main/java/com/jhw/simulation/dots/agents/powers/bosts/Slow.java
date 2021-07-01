@@ -3,7 +3,6 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-
 package com.jhw.simulation.dots.agents.powers.bosts;
 
 import com.jhw.simulation.dots.agents.powers.Power;
@@ -23,5 +22,5 @@ public class Slow extends Power {
     public ImageIcon getImage() {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
-    
+
 }

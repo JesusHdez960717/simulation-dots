@@ -18,7 +18,6 @@ public class IA extends Agent {
 
     private static final long serialVersionUID = 1;
 
-
     public IA(DotsSimulation_Sim sim, Double2D startLoc, int team) {
         super(sim, startLoc, team);
     }

@@ -5,7 +5,7 @@
  */
 package com.jhw.simulation.dots.visual;
 
-import com.jhw.swing.material.components.container.MaterialContainersFactory;
+import com.root101.swing.material.components.container.MaterialContainersFactory;
 import java.awt.BorderLayout;
 import java.awt.Dimension;
 import javax.swing.JComponent;

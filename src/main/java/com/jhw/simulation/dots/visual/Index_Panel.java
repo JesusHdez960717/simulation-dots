@@ -6,7 +6,7 @@
 package com.jhw.simulation.dots.visual;
 
 import com.jhw.simulation.dots.controllers.IndexController;
-import com.jhw.swing.material.components.container.panel._PanelGradient;
+import com.root101.swing.material.components.container.panel._PanelGradient;
 import java.awt.GridLayout;
 
 /**

@@ -16,9 +16,8 @@ public class BackgroundPortrayal extends FieldPortrayal2D {
         Color alphaWhite = new Color(1.0f, 1.0f, 1.0f, 0.65f);
         g.setColor(alphaWhite);
         g.fillRect(clip.x, clip.y, clip.width, clip.height);
-        
-        //g.drawImage(back.getImage(), 0, 0, clip.width, clip.height, null);
 
+        //g.drawImage(back.getImage(), 0, 0, clip.width, clip.height, null);
         //super.draw(object, g, info);
     }
 }

@@ -18,7 +18,7 @@ public class MusicService {
 
     public static int getAudioAmplitude() {
         int n = 20000;
-        int pos = (int) Math.ceil(audio.getClip().getFramePosition()/n);
+        int pos = (int) Math.ceil(audio.getClip().getFramePosition() / n);
         pos *= n;
         return audio.getSampleInt(pos);
     }

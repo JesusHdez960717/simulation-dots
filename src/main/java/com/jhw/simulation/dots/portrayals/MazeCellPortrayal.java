@@ -6,7 +6,7 @@
 package com.jhw.simulation.dots.portrayals;
 
 import com.jhw.simulation.dots.services.MusicService;
-import com.jhw.swing.material.standards.MaterialColors;
+import com.root101.swing.material.standards.MaterialColors;
 import java.awt.*;
 import java.awt.geom.*;
 import java.util.ArrayList;

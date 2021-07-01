@@ -7,7 +7,7 @@ package com.jhw.simulation.dots.main;
 
 import com.jhw.simulation.dots.services.NavigationService;
 import com.jhw.simulation.dots.services.ProgressService;
-import com.jhw.swing.ui.MaterialLookAndFeel;
+import com.root101.swing.ui.MaterialLookAndFeel;
 import javax.swing.UIManager;
 import javax.swing.UnsupportedLookAndFeelException;
 

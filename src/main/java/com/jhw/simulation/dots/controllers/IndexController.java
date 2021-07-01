@@ -55,7 +55,7 @@ public class IndexController {
 
     public void actionQuit() {
         if (Utility_Class.jopContinue("Seguro desea salir???")) {
-        System.exit(0);
+            System.exit(0);
         }
     }
 }

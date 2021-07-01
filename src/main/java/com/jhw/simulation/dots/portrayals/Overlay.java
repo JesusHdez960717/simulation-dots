@@ -38,7 +38,7 @@ public class Overlay extends FieldPortrayal2D {
         // the font numbers sometimes don't have the same bounding box vertically, causing the text to jump about.
         Rectangle2D bounds = new TextLayout("" + pacman.getScore(), font, graphics.getFontRenderContext()).getBounds();
         //if (firstTimeScoreY == 0) {
-            firstTimeScoreY = (int) ((GUTTER + bounds.getHeight()) / 2);
+        firstTimeScoreY = (int) ((GUTTER + bounds.getHeight()) / 2);
         //}
 
         // if we're paused, say so
